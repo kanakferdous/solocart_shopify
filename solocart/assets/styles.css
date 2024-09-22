@@ -1,38 +1,110 @@
+/* Global Styles */
+:root {
+  --primary-color: {{ settings.primary_color }};
+  --secondary-color: {{ settings.secondary_color }};
+  --accent-color: {{ settings.accent_color }};
+}
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
+  color: var(--primary-color); /* Set a default body color */
+  background-color: #ffffff;
   margin: 0;
   padding: 0;
 }
 
-header,
-footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 10px;
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto Condensed", sans-serif;
+  color: #0b0f0e;
 }
 
+/* Links */
+a {
+  font-family: "Poppins", sans-serif;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--secondary-color);
+}
+
+/* Custom Styles */
+.site-header,
+.site-footer {
+  background-color: #e4e9ee;
+  color: #1d2322;
+}
 .container {
-  padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 20px;
 }
 
-h1 {
-  color: #333;
+.site-header {
+  background-color: #333;
+  padding: 10px 0;
 }
-
-nav ul {
+.site-logo img {
+  max-height: 50px;
+}
+.site-nav ul {
   list-style: none;
+  margin: 0;
   padding: 0;
 }
-
-nav ul li {
+.site-nav ul li {
   display: inline;
   margin-right: 15px;
 }
-
-nav ul li a {
+.site-nav ul li a {
   color: #fff;
   text-decoration: none;
+}
+
+.site-footer {
+  background-color: #222;
+  color: #aaa;
+  padding: 20px 0;
+  text-align: center;
+}
+.site-footer p {
+  margin: 5px 0;
+}
+
+/* Hero Section Styles */
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  padding: 100px 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.hero-section h1 {
+  font-size: 3em;
+  margin: 0 0 20px;
+}
+
+.hero-section p {
+  font-size: 1.5em;
+  margin: 0 0 30px;
+}
+
+.btn-primary {
+  background-color: #756AB6;
+  color: #ffffff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #AC87C5;
 }

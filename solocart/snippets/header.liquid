@@ -1,11 +1,17 @@
-<header>
-    <h1>Solocart Header</h1>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/collections/all">Shop</a></li>
-            <li><a href="/pages/about">About</a></li>
-            <li><a href="/pages/contact">Contact</a></li>
-        </ul>
-    </nav>
+<header class="site-header">
+    <div class="container">
+        <div class="site-logo">
+            <a href="{{ shop.url }}">
+                <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" />
+            </a>
+        </div>
+        <nav class="site-nav">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/collections/all">Shop</a></li>
+                <li><a href="/pages/about">About</a></li>
+                <li><a href="/pages/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
 </header>
