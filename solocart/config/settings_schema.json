@@ -178,6 +178,11 @@
         "id": "homepage_banner_button_link",
         "label": "Button Link",
         "default": "/collections/all"
+      },
+      {
+        "type": "image_picker",
+        "id": "homepage_banner_right_image",
+        "label": "Right Side Banner Image"
       }
     ]
   }

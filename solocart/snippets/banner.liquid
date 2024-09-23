@@ -9,7 +9,11 @@
             </a>
         </div>
         <div class="banner-right">
-            <img src="{{ 'banner-image.jpg' | asset_url }}" alt="Banner Image" />
+            {% if settings.homepage_banner_right_image %}
+                <img src="{{ settings.homepage_banner_right_image | img_url: 'master' }}" alt="Banner Image" />
+            {% else %}
+                <img src="{{ 'placeholder.jpg' | asset_url }}" alt="Placeholder Image" />
+            {% endif %}
         </div>
     </div>
 {% else %}
