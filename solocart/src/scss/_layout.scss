@@ -2,3 +2,37 @@
   width: 1200px;
   margin: 0 auto;
 }
+
+.btn-primary {
+  padding: 16px 56px;
+  background-color: $white-color;
+  border: 2px solid $dark-color;
+  font-family: $heading-font;
+  font-size: calc(24 / 16) * 1rem;
+  font-weight: 500;
+  line-height: 1;
+  color: $dark-color;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.4s;
+  box-shadow: 4px 4px 0px 0px $dark-color;
+  svg {
+    transition: all 0.4s;
+    path {
+      transition: all 0.4s;
+    }
+  }
+  &:hover {
+    color: $white-color;
+    background-color: $primary-color;
+    box-shadow: -4px -4px 0px 0px $dark-color;
+    svg {
+      transform: rotate(90deg);
+      path {
+        stroke: $white-color;
+      }
+    }
+  }
+}
