@@ -61,3 +61,99 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Function to add product to cart
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".add-to-cart").forEach((button) => {
+    button.addEventListener("click", function () {
+      const productId = this.getAttribute("data-product-id");
+      addToCart(productId);
+    });
+  });
+
+  function addToCart(productId) {
+    fetch("/cart/add.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        id: productId,
+        quantity: 1,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert("Product added to cart!");
+      })
+      .catch((error) => console.error("Error adding to cart:", error));
+  }
+
+  // Function to open product details popup
+  document.querySelectorAll(".view-product").forEach((button) => {
+    button.addEventListener("click", function () {
+      const productHandle = this.getAttribute("data-product-handle");
+      openProductPopup(productHandle);
+    });
+  });
+
+  function openProductPopup(productHandle) {
+    fetch(`/products/${productHandle}.js`)
+      .then((response) => response.json())
+      .then((product) => {
+        const popup = document.getElementById("product-popup");
+        const popupContent = document.querySelector(".product-popup-details");
+
+        // Populate product details in the popup
+        popupContent.innerHTML = `
+          <h2>${product.title}</h2>
+          <img src="${product.images[0]}" alt="${product.title}">
+          <p>${product.description}</p>
+          <div class="popup-price">
+            ${
+              product.compare_at_price
+                ? `<span class="sale-price">${(product.price / 100).toFixed(
+                    2
+                  )}</span>
+               <span class="original-price">${(
+                 product.compare_at_price / 100
+               ).toFixed(2)}</span>`
+                : `<span class="regular-price">${(product.price / 100).toFixed(
+                    2
+                  )}</span>`
+            }
+          </div>
+          <button type="button" class="btn add-to-cart" data-product-id="${
+            product.variants[0].id
+          }">Add to Cart</button>
+        `;
+
+        // Open the popup
+        popup.style.display = "block";
+
+        // Re-attach event listener for the new Add to Cart button in the popup
+        document
+          .querySelector(".product-popup .add-to-cart")
+          .addEventListener("click", function () {
+            const productId = this.getAttribute("data-product-id");
+            addToCart(productId);
+          });
+      })
+      .catch((error) =>
+        console.error("Error fetching product details:", error)
+      );
+  }
+
+  // Close popup when clicking on close button or outside the popup content
+  document.querySelector(".close-popup").addEventListener("click", function () {
+    document.getElementById("product-popup").style.display = "none";
+  });
+
+  window.addEventListener("click", function (event) {
+    const popup = document.getElementById("product-popup");
+    if (event.target === popup) {
+      popup.style.display = "none";
+    }
+  });
+});

@@ -1,0 +1,73 @@
+{% schema %}
+{
+  "name": "Best Seller Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Best Sellers"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Seller Products",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="best-seller-products">
+  <div class="container">
+    <h2>{{ section.settings.section_title }}</h2>
+    <div class="product-list">
+      {% for block in section.blocks %}
+        {% assign product = all_products[block.settings.product] %}
+        {% if product %}
+          <div class="product-item">
+            <a href="{{ product.url }}" class="product-image">
+              <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{ product.title }}">
+            </a>
+            <div class="product-details">
+              <h3 class="product-title">{{ product.title }}</h3>
+              <div class="product-price">
+                {% if product.compare_at_price > product.price %}
+                  <span class="sale-price">{{ product.price | money }}</span>
+                  <span class="original-price">{{ product.compare_at_price | money }}</span>
+                {% else %}
+                  <span class="regular-price">{{ product.price | money }}</span>
+                {% endif %}
+              </div>
+              <button type="button" class="btn view-product" data-product-handle="{{ product.handle }}">View Product</button>
+              <button type="button" class="btn add-to-cart" data-product-id="{{ product.id }}">Add to Cart</button>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Product Details Popup -->
+  <div id="product-popup" class="product-popup">
+    <div class="product-popup-content">
+      <span class="close-popup">&times;</span>
+      <div class="product-popup-details">
+        <!-- Product details will be loaded dynamically here -->
+      </div>
+    </div>
+  </div>
+</section>
