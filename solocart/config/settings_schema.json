@@ -177,7 +177,7 @@
         "type": "url",
         "id": "homepage_banner_button_link",
         "label": "Button Link",
-        "default": "/collections/all"
+        "default": "\/collections\/all"
       },
       {
         "type": "image_picker",

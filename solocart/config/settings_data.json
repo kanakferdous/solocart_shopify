@@ -10,9 +10,42 @@
     "homepage_banner_right_image": "shopify:\/\/shop_images\/solocart_banner_image.png",
     "theme_name": "Solocart",
     "sections": {
-      "homepage": {
-        "type": "homepage",
+      "best-seller-products": {
+        "type": "best-seller-products",
+        "blocks": {
+          "product_9jbPCV": {
+            "type": "product",
+            "settings": {
+              "product": "5-panel-hat"
+            }
+          },
+          "product_Cd9Wcj": {
+            "type": "product",
+            "settings": {
+              "product": "ayers-chambray"
+            }
+          },
+          "product_EyhQpY": {
+            "type": "product",
+            "settings": {
+              "product": "camp-stool"
+            }
+          },
+          "product_jezBFU": {
+            "type": "product",
+            "settings": {
+              "product": "dawson-trolley"
+            }
+          }
+        },
+        "block_order": [
+          "product_9jbPCV",
+          "product_Cd9Wcj",
+          "product_EyhQpY",
+          "product_jezBFU"
+        ],
         "settings": {
+          "section_title": "Best Sellers"
         }
       }
     },
