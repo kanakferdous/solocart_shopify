@@ -2,7 +2,7 @@
   {% include 'top-bar' %}
   <div class="container">
     <nav class="site-nav">
-      <button class="hamburger-menu" onclick="toggleMenu()">&#9776;</button>
+      <button class="hamburger-menu" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
       <div class="logo">
         <a href="{{ shop.url }}">
           {% if settings.logo_image %}
@@ -15,10 +15,17 @@
         </a>
       </div>
       <div class="header-icons">
-        <a href="/account" class="account-icon">Account</a>
-        <a href="/cart" class="cart-icon">Cart</a>
+        <a href="/cart" class="cart-icon"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="/account" class="account-icon"><i class="fa-solid fa-user"></i></a>
       </div>
     </nav>
+    <div class="main-nav-menu" id="main-nav-menu">
+      <ul>
+        {% for link in linklists.main-menu.links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
     {% include 'banner' %}
   </div>
 </header>
