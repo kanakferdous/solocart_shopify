@@ -15,7 +15,7 @@
     justify-content: center;
     gap: 30px;
     .product-item {
-      width: calc(25% - 20px);
+      width: calc(33.33% - 20px);
       position: relative;
       &::after {
         content: '';
@@ -63,9 +63,24 @@
             color: $white-color;
           }
         }
-        .view-product {
-          margin-top: 10px;
-          margin-bottom: 10px;
+        .product-buttons {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 15px;
+          flex-wrap: wrap;
+          .btn-primary-small {
+            &:hover {
+              background-color: $light-color;
+              color: $dark-color;
+              overflow: inherit;
+              svg {
+                path {
+                  stroke: $dark-color;
+                }
+              }
+            }
+          }
         }
       }
     }

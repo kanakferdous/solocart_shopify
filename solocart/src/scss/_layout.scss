@@ -37,11 +37,11 @@
   }
 }
 .btn-primary-small {
-  padding: 6px 24px;
+  padding: 6px 16px;
   background-color: $white-color;
   border: 2px solid $dark-color;
   font-family: $heading-font;
-  font-size: calc(16 / 16) * 1rem;
+  font-size: calc(14 / 16) * 1rem;
   font-weight: 500;
   line-height: 1;
   color: $dark-color;
@@ -53,7 +53,7 @@
   box-shadow: 4px 4px 0px 0px $dark-color;
   svg {
     transition: all 0.4s;
-    width: 16px;
+    width: 14px;
     path {
       transition: all 0.4s;
     }

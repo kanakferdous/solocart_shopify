@@ -52,8 +52,10 @@
                   <span class="regular-price">{{ product.price | money }}</span>
                 {% endif %}
               </div>
-              <button type="button" class="btn-primary-small view-product" data-product-handle="{{ product.handle }}">View Product{% include 'icon-arrow-up-right' %}</button>
-              <button type="button" class="btn-primary-small add-to-cart" data-product-id="{{ product.id }}">Add to Cart{% include 'icon-arrow-up-right' %}</button>
+              <div class="product-buttons">
+                <button type="button" class="btn-primary-small view-product" data-product-handle="{{ product.handle }}">View Product{% include 'icon-arrow-up-right' %}</button>
+                <button type="button" class="btn-primary-small add-to-cart" data-product-id="{{ product.id }}">Add to Cart{% include 'icon-arrow-up-right' %}</button>
+              </div>
             </div>
           </div>
         {% endif %}
