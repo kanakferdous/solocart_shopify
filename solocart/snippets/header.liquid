@@ -2,10 +2,16 @@
   {% include 'top-bar' %}
   <div class="container">
     <nav class="site-nav">
-      <button class="hamburger-menu">&#9776;</button>
+      <button class="hamburger-menu" onclick="toggleMenu()">&#9776;</button>
       <div class="logo">
         <a href="{{ shop.url }}">
-          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" />
+          {% if settings.logo_image %}
+            <img src="{{ settings.logo_image | img_url: 'master' }}" alt="{{ shop.name }}" style="width: {{ settings.logo_width }}px; height: {{ settings.logo_height }}px;" />
+          {% else %}
+            <span style="font-size: {{ settings.logo_height / 2 }}px; line-height: {{ settings.logo_height }}px;">
+              {{ settings.logo_text }}
+            </span>
+          {% endif %}
         </a>
       </div>
       <div class="header-icons">
@@ -13,13 +19,6 @@
         <a href="/cart" class="cart-icon">Cart</a>
       </div>
     </nav>
-    <div class="nav-menu" id="nav-menu">
-      <ul>
-        {% for link in linklists.main-menu.links %}
-          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
     {% include 'banner' %}
   </div>
 </header>

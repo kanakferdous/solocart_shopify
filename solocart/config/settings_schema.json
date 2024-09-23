@@ -55,6 +55,35 @@
         "id": "header_background_color",
         "label": "Header Background Color",
         "default": "#ffffff"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo Image"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo Width (px)",
+        "min": 50,
+        "max": 300,
+        "step": 5,
+        "default": 150
+      },
+      {
+        "type": "range",
+        "id": "logo_height",
+        "label": "Logo Height (px)",
+        "min": 50,
+        "max": 300,
+        "step": 5,
+        "default": 50
+      },
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Logo Text",
+        "default": "Solocart"
       }
     ]
   },
