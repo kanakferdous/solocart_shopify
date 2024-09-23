@@ -54,7 +54,7 @@
               </div>
               <div class="product-buttons">
                 <button type="button" class="btn-primary-small view-product" data-product-handle="{{ product.handle }}">View Product{% include 'icon-arrow-up-right' %}</button>
-                <button type="button" class="btn-primary-small add-to-cart" data-product-id="{{ product.id }}">Add to Cart{% include 'icon-arrow-up-right' %}</button>
+                <button type="button" class="btn-primary-small add-to-cart" data-product-id="{{ product.variants.first.id }}">Add to Cart{% include 'icon-arrow-up-right' %}</button>
               </div>
             </div>
           </div>
@@ -66,7 +66,7 @@
   <!-- Product Details Popup -->
   <div id="product-popup" class="product-popup">
     <div class="product-popup-content">
-      <span class="close-popup">&times;</span>
+      <span class="close-popup"><i class="fa-solid fa-xmark"></i></span>
       <div class="product-popup-details">
         <!-- Product details will be loaded dynamically here -->
       </div>
