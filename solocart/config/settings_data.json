@@ -30,19 +30,12 @@
             "settings": {
               "product": "camp-stool"
             }
-          },
-          "product_jezBFU": {
-            "type": "product",
-            "settings": {
-              "product": "dawson-trolley"
-            }
           }
         },
         "block_order": [
           "product_9jbPCV",
           "product_Cd9Wcj",
-          "product_EyhQpY",
-          "product_jezBFU"
+          "product_EyhQpY"
         ],
         "settings": {
           "section_title": "Best Sellers"
