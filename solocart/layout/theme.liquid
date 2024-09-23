@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page_title }}</title>
-    {{ content_for_header }}
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }}</title>
+  {{ content_for_header }}
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
 </head>
 <body>
-    {% include 'header' %}
-    {{ content_for_layout }}
-    {% include 'footer' %}
-    {{ content_for_footer }}
+  {% include 'header' %}
+  {{ content_for_layout }}
+  {% include 'footer' %}
+  {{ content_for_footer }}
 </body>
 </html>

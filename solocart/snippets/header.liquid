@@ -1,17 +1,25 @@
-<header class="site-header">
-    <div class="container">
-        <div class="site-logo">
-            <a href="{{ shop.url }}">
-                <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" />
-            </a>
-        </div>
-        <nav class="site-nav">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/collections/all">Shop</a></li>
-                <li><a href="/pages/about">About</a></li>
-                <li><a href="/pages/contact">Contact</a></li>
-            </ul>
-        </nav>
+<header class="site-header" style="background-color: {{ settings.header_background_color }};">
+  {% include 'top-bar' %}
+  <div class="container">
+    <nav class="site-nav">
+      <button class="hamburger-menu">&#9776;</button>
+      <div class="logo">
+        <a href="{{ shop.url }}">
+          <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" />
+        </a>
+      </div>
+      <div class="header-icons">
+        <a href="/account" class="account-icon">Account</a>
+        <a href="/cart" class="cart-icon">Cart</a>
+      </div>
+    </nav>
+    <div class="nav-menu" id="nav-menu">
+      <ul>
+        {% for link in linklists.main-menu.links %}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+      </ul>
     </div>
+    {% include 'banner' %}
+  </div>
 </header>

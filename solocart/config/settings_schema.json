@@ -34,5 +34,63 @@
         "default": "#E0AED0"
       }
     ]
+  },
+  {
+    "name": "Header Settings",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_top_bar",
+        "label": "Show Top Bar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "top_bar_text",
+        "label": "Top Bar Text",
+        "default": "Welcome to our store!"
+      },
+      {
+        "type": "color",
+        "id": "header_background_color",
+        "label": "Header Background Color",
+        "default": "#ffffff"
+      }
+    ]
+  },
+  {
+    "name": "Homepage Banner Settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "homepage_banner_small_text",
+        "label": "Small Text",
+        "default": "Your small text here"
+      },
+      {
+        "type": "text",
+        "id": "homepage_banner_main_title",
+        "label": "Main Title",
+        "default": "Welcome to Our Store"
+      },
+      {
+        "type": "textarea",
+        "id": "homepage_banner_description",
+        "label": "Description",
+        "default": "This is a description for the banner section."
+      },
+      {
+        "type": "text",
+        "id": "homepage_banner_button_text",
+        "label": "Button Text",
+        "default": "Shop Now"
+      },
+      {
+        "type": "url",
+        "id": "homepage_banner_button_link",
+        "label": "Button Link",
+        "default": "/collections/all"
+      }
+    ]
   }
 ]
