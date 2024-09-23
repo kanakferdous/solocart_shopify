@@ -7,8 +7,8 @@ const cssnano = require("cssnano");
 const uglify = require("gulp-uglify");
 const sourcemaps = require("gulp-sourcemaps");
 const rename = require("gulp-rename");
-const gulpif = require("gulp-if");
 const browserSync = require("browser-sync").create();
+const exec = require("child_process").exec; // Import exec for running shopify theme serve
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -51,11 +51,20 @@ function minifyJS() {
     .pipe(browserSync.stream());
 }
 
+// Shopify Theme Serve
+function shopifyServe(cb) {
+  exec("shopify theme serve", function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+}
+
 // Watch for changes
 function watchFiles() {
   watch(paths.scss, compileSCSS);
   watch(paths.js, minifyJS);
 }
 
-// Default task
-exports.default = series(parallel(compileSCSS, minifyJS), watchFiles);
+// Default task combining Gulp tasks and Shopify theme serve
+exports.default = parallel(shopifyServe, watchFiles);
