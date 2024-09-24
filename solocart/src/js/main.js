@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // CART FUNCTIONALITY
 function initCart() {
-  // Initialize and manage the cart, including updating the cart count and sidebar.
   const cartIcon = document.querySelector(".cart-icon");
   const closeCartButton = document.querySelector(".close-cart");
   const cartSidebar = document.getElementById("cart-sidebar");
+  const updateCartButton = document.querySelector(".btn-update-cart");
 
   cartIcon?.addEventListener("click", function (event) {
     event.preventDefault();
@@ -19,13 +19,31 @@ function initCart() {
 
   closeCartButton?.addEventListener("click", closeCartSidebar);
 
+  // Close the cart sidebar when clicking outside of it
+  document.addEventListener("click", function (event) {
+    if (
+      cartSidebar &&
+      !cartSidebar.contains(event.target) &&
+      !cartIcon.contains(event.target)
+    ) {
+      closeCartSidebar();
+    }
+  });
+
   // Initial cart count and sidebar update
   updateCartCount();
   updateCartSidebar();
 
   document.addEventListener("cart:updated", updateCartSidebar);
 
-  // Function to toggle cart sidebar
+  // Always keep Update Cart button enabled and functional
+  if (updateCartButton) {
+    updateCartButton.disabled = false; // Enable the button
+    updateCartButton.addEventListener("click", function () {
+      updateCartFromSidebar(); // Update cart quantities based on sidebar inputs
+    });
+  }
+
   function toggleCartSidebar() {
     if (cartSidebar) {
       cartSidebar.classList.toggle("active");
@@ -34,7 +52,6 @@ function initCart() {
     }
   }
 
-  // Function to close the cart sidebar
   function closeCartSidebar() {
     if (cartSidebar) {
       cartSidebar.classList.remove("active");
@@ -42,7 +59,6 @@ function initCart() {
     }
   }
 
-  // Function to update the cart count in the header
   function updateCartCount() {
     fetch("/cart.js")
       .then((response) => response.json())
@@ -63,13 +79,14 @@ function initCart() {
       .catch((error) => console.error("Error fetching cart data:", error));
   }
 
-  // Function to update the cart sidebar with items
   function updateCartSidebar() {
     fetch("/cart.js")
       .then((response) => response.json())
       .then((cart) => {
         const cartItemsContainer = document.querySelector(".cart-items");
         const cartTotalPrice = document.querySelector(".cart-total-price");
+        const viewCartButton = document.querySelector(".btn-view-cart");
+        const checkoutButton = document.querySelector(".btn-checkout");
 
         if (cartItemsContainer && cartTotalPrice) {
           cartItemsContainer.innerHTML = "";
@@ -77,8 +94,16 @@ function initCart() {
           if (cart.item_count === 0) {
             cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
             cartTotalPrice.textContent = `$0.00`;
+            // Hide View Cart and Checkout Buttons when cart is empty
+            viewCartButton.style.display = "none";
+            checkoutButton.style.display = "none";
+            updateCartButton.style.display = "none"; // Hide update cart button
             return;
           }
+
+          viewCartButton.style.display = "block"; // Show View Cart button
+          checkoutButton.style.display = "block"; // Show Checkout button
+          updateCartButton.style.display = "block"; // Show update cart button
 
           cart.items.forEach((item) => {
             const itemHTML = `
@@ -87,9 +112,14 @@ function initCart() {
                 <div class="cart-item-details-wrap">
                   <div class="cart-item-details">
                     <h4>${item.title}</h4>
-                    <p class="cart-item-qp">${item.quantity} x $${(
+                    <div class="cart-item-ppin">
+                      <p class="cart-item-qp">${item.quantity} x $${(
               item.price / 100
             ).toFixed(2)}</p>
+                      <input type="number" class="item-quantity" value="${
+                        item.quantity
+                      }" min="1" data-line="${item.key}">
+                    </div>
                     <button type="button" class="btn-remove-item" data-line="${
                       item.key
                     }"><i class="fa-solid fa-xmark"></i></button>
@@ -107,7 +137,13 @@ function initCart() {
             2
           )}`;
 
-          // Attach event listeners for remove buttons
+          // Attach event listeners for quantity input fields and remove buttons
+          document.querySelectorAll(".item-quantity").forEach((input) => {
+            input.addEventListener("input", function () {
+              updateCartButton.disabled = false; // Enable update button on change
+            });
+          });
+
           document.querySelectorAll(".btn-remove-item").forEach((button) => {
             button.addEventListener("click", function () {
               const lineItemKey = this.getAttribute("data-line");
@@ -121,7 +157,59 @@ function initCart() {
       });
   }
 
-  // Function to remove an item from the cart
+  // Update cart quantities based on sidebar inputs
+  function updateCartFromSidebar() {
+    const itemsToUpdate = [];
+    document.querySelectorAll(".item-quantity").forEach((input) => {
+      const lineItemKey = input.getAttribute("data-line");
+      const quantity = parseInt(input.value, 10);
+
+      // Collect items to be updated in the cart
+      itemsToUpdate.push({
+        id: lineItemKey,
+        quantity: quantity,
+      });
+    });
+
+    // Call the API to update all items at once
+    updateCartItems(itemsToUpdate);
+  }
+
+  // Update multiple cart items with one request
+  function updateCartItems(items) {
+    fetch("/cart/update.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        updates: items.reduce((acc, item) => {
+          acc[item.id] = item.quantity;
+          return acc;
+        }, {}),
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error updating items in cart.");
+        }
+        return response.json();
+      })
+      .then(() => {
+        showNotification("Cart updated successfully!");
+        updateCartCount();
+        updateCartSidebar();
+        document.dispatchEvent(new Event("cart:updated"));
+      })
+      .catch((error) => {
+        console.error("Error updating items in cart:", error);
+        showNotification(
+          `There was an error updating the items in your cart: ${error.message}`
+        );
+      });
+  }
+
   function removeFromCart(lineItemKey) {
     fetch("/cart/change.js", {
       method: "POST",
@@ -291,7 +379,6 @@ function initProductFunctionality() {
 
 // HAMBURGER MENU FUNCTIONALITY
 function initHamburgerMenu() {
-  // Manage hamburger menu functionality for mobile navigation.
   const hamburgerButton = document.querySelector(".hamburger-menu");
   const closeButton = document.querySelector(".close-menu");
   const navMenu = document.getElementById("main-nav-menu");
@@ -338,20 +425,18 @@ function showNotification(message) {
   notification.innerHTML = `<p>${message}</p> <span class="notification-close"><i class="fa-solid fa-xmark"></i></span>`;
   notificationContainer.appendChild(notification);
 
-  // Close the notification container after a delay
   setTimeout(() => {
     notificationContainer.classList.remove("fade-in");
     notificationContainer.classList.add("fade-out");
     notificationContainer.addEventListener("transitionend", () => {
       notificationContainer.classList.remove("fade-out");
-      notification.remove(); // Remove the specific notification
+      notification.remove();
     });
   }, 3000);
 
-  // Allow manual closing
   notification
     .querySelector(".notification-close")
     .addEventListener("click", () => {
-      notification.remove(); // Remove the specific notification
+      notification.remove();
     });
 }

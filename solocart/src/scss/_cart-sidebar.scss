@@ -9,6 +9,10 @@
   background-color: $primary-color;
   transform: translateX(100%);
   z-index: 999999;
+  .cart-sidebar-wrapper {
+    position: relative;
+    height: 100%;
+  }
   .cart-sidebar-header {
     border-bottom: 1px solid $light-color;
     h2 {
@@ -30,12 +34,12 @@
       justify-content: center;
       position: absolute;
       right: 10px;
-      top: 10px;
+      top: -30px;
       cursor: pointer;
     }
   }
   .cart-items {
-    margin: 10px 0px 20px;
+    margin: 20px 0px 0px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -74,11 +78,25 @@
             margin: 0px;
             font-weight: 500;
           }
-          .cart-item-qp {
-            font-family: $body-font;
-            font-size: 1rem;
-            line-height: 1.2;
-            margin: 10px 0px 0px 0px;
+          .cart-item-ppin {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            .cart-item-qp {
+              font-family: $body-font;
+              font-size: 1rem;
+              line-height: 1.2;
+              margin: 0px;
+              flex-grow: 1;
+            }
+            .item-quantity {
+              font-family: $body-font;
+              width: 40px;
+              padding: 5px;
+              border-radius: 5px;
+              color: $dark-color;
+            }
           }
           .btn-remove-item {
             position: absolute;
@@ -111,10 +129,13 @@
     }
   }
   .cart-sidebar-footer {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid $light-color;
     .cart-total {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       span {
         font-family: $heading-font;
         font-size: calc(18 / 16) * 1rem;
@@ -135,6 +156,18 @@
       justify-content: flex-start;
       gap: 15px;
       flex-wrap: wrap;
+      .btn-update-cart {
+        position: absolute;
+        bottom: 70px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        cursor: pointer;
+        &:hover {
+          background-color: $light-color;
+          color: $dark-color;
+        }
+      }
       .btn-primary-small {
         &:hover {
           background-color: $light-color;
