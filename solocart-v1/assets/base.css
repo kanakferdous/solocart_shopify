@@ -1181,6 +1181,30 @@ deferred-media {
 
 /* component-button */
 /* Button - default */
+.button--primary {
+  border: 1px solid #0b0f0e !important;
+  box-shadow: 4px 4px 0px 0px #0b0f0e;
+  font-family: "ClashDisplay-Variable" !important;
+  font-weight: 600 !important;
+  transition: all .4s !important;
+}
+.button--primary::before, .button--primary::after {
+  display: none;
+}
+.button--primary:hover {
+  border: 1px solid #0b0f0e !important;
+  box-shadow: -4px -4px 0px 0px #0b0f0e;
+  transition: all .4s;
+}
+.button--primary .icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-left: 3px;
+  transition: all .4s;
+}
+.button--primary:hover .icon {
+  transform: rotate(90deg);
+}
 
 .button--secondary,
 .button--tertiary {

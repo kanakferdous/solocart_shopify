@@ -41,8 +41,9 @@
         "button_MT6eyi"
       ],
       "custom_css": [
-        ".subtitle {font-family: ClashDisplay-Variable; font-size: 3rem; line-height: 1.2; font-weight: 600;}",
-        ".image-with-text__heading {font-weight: 600; line-height: 1;}"
+        ".subtitle {font-family: ClashDisplay-Variable; font-size: 3rem; line-height: 1.2; font-weight: 600; color: #0b0f0e;}",
+        ".image-with-text__heading {font-weight: 600; line-height: 1;}",
+        "#ImageWithText--template--20967524597795__image_with_text_tQipNg {padding-left: 0px;}"
       ],
       "settings": {
         "image": "shopify:\/\/shop_images\/CydneyPlaid_Longsleeve_e72db08c-cd32-41eb-8251-d826cf0fc299.jpg",
@@ -56,7 +57,7 @@
         "color_scheme": "scheme-308cdcfa-2667-41ce-9c1a-5a98014196af",
         "image_behavior": "none",
         "mobile_content_alignment": "left",
-        "padding_top": 0,
+        "padding_top": 100,
         "padding_bottom": 0
       }
     },
