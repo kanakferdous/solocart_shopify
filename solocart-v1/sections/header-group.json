@@ -33,7 +33,7 @@
         "menu": "main-menu",
         "menu_type_desktop": "drawer",
         "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
+        "show_line_separator": false,
         "color_scheme": "scheme-3ffe94b5-8dba-4306-9fbd-b117e3d615ab",
         "menu_color_scheme": "scheme-5",
         "enable_country_selector": true,
